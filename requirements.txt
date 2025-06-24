@@ -1,0 +1,14 @@
+fastapi
+uvicorn
+python-dotenv
+azure-storage-blob
+pandas
+openai
+fastmcp
+pyodbc
+requests
+slowapi
+sqlparse 
+structlog 
+azure-kusto-data
+sqlalchemy
