@@ -4257,4 +4257,4 @@ if __name__ == "__main__":
     print("🏥 Health: GET /health") 
     print("📘 Capabilities: GET /api/fabric/capabilities") 
     validate_environment() 
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run("__main__:app", host="0.0.0.0", port=8000)
