@@ -552,7 +552,7 @@ async def get_from_kql_cache(question: str, session_id: Optional[str] = None) ->
 
     cache_query = f""" 
 
-    ChatHistory 
+    ChatHistory_CFO
 
     | where SessionID == '{actual_session_id}' 
 
@@ -604,7 +604,7 @@ async def get_latest_responses(session_id: Optional[str] = None) -> List[Dict]:
 
     history_query = f""" 
 
-    ChatHistory 
+    ChatHistory_CFO
 
     | where SessionID == '{actual_session_id}' 
 
@@ -3312,7 +3312,7 @@ async def get_chat_messages(
 
         check_query = f""" 
 
-        ChatHistory 
+        ChatHistory_CFO
 
         | where SessionID == '{session_id}' 
 
@@ -3336,7 +3336,7 @@ async def get_chat_messages(
 
         history_query = f""" 
 
-        ChatHistory 
+        ChatHistory_CFO
 
         | where SessionID == '{session_id}' 
 
@@ -3560,7 +3560,7 @@ async def get_chat_sessions(
 
             sessions_query = f""" 
 
-            ChatHistory 
+            ChatHistory_CFO
 
             | where SessionID startswith 'powerbi_' 
 
@@ -3590,7 +3590,7 @@ async def get_chat_sessions(
 
             sessions_query = f""" 
 
-            ChatHistory 
+            ChatHistory_CFO
 
             | where SessionID contains 'powerbi_{date}' 
 
@@ -3938,7 +3938,7 @@ async def health_check():
 
         count_query = f""" 
 
-        ChatHistory 
+        ChatHistory_CFO
 
         | where SessionID == 'default-session-1234567890' 
 
@@ -4257,4 +4257,4 @@ if __name__ == "__main__":
     print("🏥 Health: GET /health") 
     print("📘 Capabilities: GET /api/fabric/capabilities") 
     validate_environment() 
-    uvicorn.run("__main__:app", host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8000)
