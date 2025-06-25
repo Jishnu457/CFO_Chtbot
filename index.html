@@ -382,13 +382,13 @@
                 width: 200px;
             }
             .sidebar.minimized {
-                width: 0;
+                width: 50px;
             }
             .main-wrapper {
                 margin-left: 200px;
             }
             .main-wrapper.minimized-sidebar {
-                margin-left: 0;
+                margin-left: 50px;
             }
             .chat-container {
                 padding: 10px;
@@ -409,6 +409,12 @@
             font-size: 0;
             line-height: 0;
             overflow: hidden;
+        }
+
+        .sidebar.minimized .sidebar-header {
+            justify-content: center;
+            padding-left: 0;
+            padding-right: 0;
         }
     </style>
 </head>
@@ -526,7 +532,8 @@
                     toggleCollapseBtn: document.getElementById('toggleCollapseBtn'),
                     toggleCollapseIcon: document.querySelector('#toggleCollapseBtn span'),
                     mainWrapper: document.getElementById('mainWrapper'),
-                    sidebarHeaderH2: document.querySelector('.sidebar-header h2')
+                    sidebarHeaderH2: document.querySelector('.sidebar-header h2'),
+                    toggleSidebar: document.getElementById('toggleSidebar')
                 };
 
                 this.state = {
@@ -560,6 +567,7 @@
             setupEventListeners() {
                 this.elements.sendBtn.onclick = () => this.sendMessage();
                 this.elements.newChatBtn.onclick = () => this.createNewChat();
+                this.elements.toggleSidebar.onclick = () => this.toggleSidebar();
 
                 this.elements.messageInput.onkeypress = (e) => {
                     if (e.key === 'Enter' && !e.shiftKey) {
@@ -873,35 +881,17 @@
                 return processedText;
             }
 
-            updateSidebarState() {
-                if (this.state.isSidebarMinimized) {
-                    this.elements.sidebar.classList.add('minimized');
-                    this.elements.mainWrapper.classList.add('minimized-sidebar');
-                    this.elements.sidebarHeaderH2.textContent = '';
-                    this.elements.toggleSidebarBtn.style.display = 'none';
-                } else {
-                    this.elements.sidebar.classList.remove('minimized');
-                    this.elements.mainWrapper.classList.remove('minimized-sidebar');
-                    this.elements.sidebarHeaderH2.textContent = 'Chats';
-                    this.elements.toggleSidebarBtn.style.display = 'none';
-                }
+            toggleSidebar() {
+                this.state.isSidebarMinimized = !this.state.isSidebarMinimized;
+                this.elements.sidebar.classList.toggle('minimized', this.state.isSidebarMinimized);
+                this.elements.mainWrapper.classList.toggle('minimized-sidebar', this.state.isSidebarMinimized);
+                this.elements.toggleSidebar.textContent = this.state.isSidebarMinimized ? '≫' : '≪';
             }
         }
 
         // Initialize when page loads
         document.addEventListener('DOMContentLoaded', () => {
             window.chatbot = new DataChatbot();
-
-            // Sidebar toggle functionality
-            const sidebar = document.getElementById('sidebar');
-            const toggleBtn = document.getElementById('toggleSidebar');
-            const mainWrapper = document.getElementById('mainWrapper');
-
-            toggleBtn.addEventListener('click', () => {
-                sidebar.classList.toggle('minimized');
-                mainWrapper.classList.toggle('minimized-sidebar');
-                toggleBtn.textContent = sidebar.classList.contains('minimized') ? '≫' : '≪';
-            });
         });
     </script>
 </body>
