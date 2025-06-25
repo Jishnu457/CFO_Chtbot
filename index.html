@@ -344,6 +344,14 @@
             cursor: not-allowed;
         }
 
+        #sendBtn.only-arrow {
+            padding-left: 12px;
+            padding-right: 12px;
+        }
+        #sendBtn.only-arrow span.text {
+            display: none;
+        }
+
         .typing-indicator {
             display: none;
             padding: 12px 20px;
@@ -503,7 +511,7 @@
                             rows="1"
                         ></textarea>
                     </div>
-                    <button id="sendBtn">Send ➤</button>
+                    <button id="sendBtn"><span class="text">Send </span>➤</button>
                 </div>
             </div>
         </div>
@@ -886,6 +894,12 @@
                 this.elements.sidebar.classList.toggle('minimized', this.state.isSidebarMinimized);
                 this.elements.mainWrapper.classList.toggle('minimized-sidebar', this.state.isSidebarMinimized);
                 this.elements.toggleSidebar.textContent = this.state.isSidebarMinimized ? '≫' : '≪';
+                // Hide send text when expanded, show when collapsed (on load)
+                if (!this.state.isSidebarMinimized) {
+                    this.elements.sendBtn.classList.add('only-arrow');
+                } else {
+                    this.elements.sendBtn.classList.remove('only-arrow');
+                }
             }
 
             toggleSidebar() {
@@ -893,6 +907,12 @@
                 this.elements.sidebar.classList.toggle('minimized', this.state.isSidebarMinimized);
                 this.elements.mainWrapper.classList.toggle('minimized-sidebar', this.state.isSidebarMinimized);
                 this.elements.toggleSidebar.textContent = this.state.isSidebarMinimized ? '≫' : '≪';
+                // Hide send text when expanded, show when collapsed
+                if (!this.state.isSidebarMinimized) {
+                    this.elements.sendBtn.classList.add('only-arrow');
+                } else {
+                    this.elements.sendBtn.classList.remove('only-arrow');
+                }
             }
         }
 
