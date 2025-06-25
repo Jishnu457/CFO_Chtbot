@@ -14,7 +14,7 @@
 
         body {
             font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
-            background: #f2f2f4;
+            background: #F4F4F4;
             min-height: 100vh;
             display: flex;
             overflow-x: hidden; /* Prevent body scroll */
@@ -23,7 +23,7 @@
         /* Sidebar styles - Fixed height and position */
         .sidebar {
             width: 280px;
-            background: #000000;
+            background: #192735;
             color: #FFFFFF;
             border-right: 1px solid rgba(255, 255, 255, 0.2);
             display: flex;
@@ -122,7 +122,7 @@
 
         .header {
             padding: 16px 24px;
-            background: #000000;
+            background: #192735;
             border-bottom: 1px solid rgba(255, 255, 255, 0.2);
             display: flex;
             align-items: center;
@@ -141,7 +141,7 @@
         .header h1 {
             font-size: 24px;
             font-weight: 600;
-            color: #FFFFFF;
+            color: #ffffff;
         }
 
         .header p {
@@ -171,7 +171,7 @@
         }
 
         .session-btn.new-chat {
-            background-color: #6c757d;
+            background-color: #C3A36D;
             padding: 6px 16px;
             font-weight: 600;
         }
@@ -325,7 +325,7 @@
         }
 
         #sendBtn {
-            background: #000000;
+            background: #c3a36d;
             color: #FFFFFF;
             border: none;
             padding: 12px 20px;
@@ -551,10 +551,11 @@
                         chatSessions: '/api/chat/sessions',
                         clearChat: '/api/chat/clear'
                     },
-                    isSidebarMinimized: false
+                    isSidebarMinimized: true
                 };
 
                 this.setupEventListeners();
+                this.setInitialSidebarState();
                 this.initializeChat();
             }
 
@@ -879,6 +880,12 @@
                 processedText = processedText.replace(/##(.*?)##/g, '<strong>$1</strong>');
                 processedText = processedText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
                 return processedText;
+            }
+
+            setInitialSidebarState() {
+                this.elements.sidebar.classList.toggle('minimized', this.state.isSidebarMinimized);
+                this.elements.mainWrapper.classList.toggle('minimized-sidebar', this.state.isSidebarMinimized);
+                this.elements.toggleSidebar.textContent = this.state.isSidebarMinimized ? '≫' : '≪';
             }
 
             toggleSidebar() {
