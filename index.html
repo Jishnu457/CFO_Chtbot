@@ -487,19 +487,7 @@
 
         <div class="chat-container">
             <div class="chat-content">
-                <div class="messages" id="messages">
-                    <div class="message system">Welcome! Ask me anything about your data...</div>
-                    <div class="message user">What are the sales trends?</div>
-                    <div class="message assistant">Based on the data analysis, here are the key sales trends I've identified...</div>
-                    <div class="message user">Can you show me a breakdown by region?</div>
-                    <div class="message assistant">Certainly! Here's the regional breakdown of sales performance...</div>
-                    <div class="message user">What about monthly comparisons?</div>
-                    <div class="message assistant">Here's the monthly comparison data showing seasonal patterns...</div>
-                    <div class="message user">How do we compare to last year?</div>
-                    <div class="message assistant">Comparing to last year's performance, there are several notable changes...</div>
-                    <div class="message user">What recommendations do you have?</div>
-                    <div class="message assistant">Based on the analysis, I recommend focusing on these key areas...</div>
-                </div>
+                <div class="messages" id="messages"></div>
                 <div class="typing-indicator" id="typingIndicator">
                     <span class="thinking-text">Thinking...</span>
                 </div>
@@ -606,6 +594,7 @@
                     }
                     this.state.isConnected = true;
                     this.updateConnectionStatus('connected');
+                    this.elements.messages.innerHTML = '';
                     this.addMessage(`✅ Connected to Smart Assistant!`, 'system');
                     await this.createNewChat(true);
                 } catch (error) {
